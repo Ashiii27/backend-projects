@@ -1,0 +1,20 @@
+{
+  "name": "telegram-learn-bot",
+  "version": "1.0.0",
+  "description": "A Telegram bot that teaches bot development from basics to advanced, with real utility features.",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "dev": "nodemon src/bot.js",
+    "webhook": "WEBHOOK=true node src/bot.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "telegraf": "^4.15.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

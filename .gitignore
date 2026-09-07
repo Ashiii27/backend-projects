@@ -1,0 +1,53 @@
+# ─── Environment & Secrets ────────────────────────────────────────────────────
+# NEVER commit your bot token or any secrets to git
+.env
+.env.local
+.env.*.local
+
+# ─── Node.js ──────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json   # uncomment this line if your team uses yarn instead
+
+# ─── Runtime & Logs ───────────────────────────────────────────────────────────
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ─── OS Files ─────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ─── Editors & IDEs ───────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+*~
+
+# ─── Build Output ─────────────────────────────────────────────────────────────
+dist/
+build/
+out/
+
+# ─── Optional: Session Storage ────────────────────────────────────────────────
+# If you swap the in-memory session store for a file-based one,
+# ignore the session data files so user data doesn't end up in git
+sessions/
+*.session
