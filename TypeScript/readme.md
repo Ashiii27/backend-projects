@@ -1,85 +1,104 @@
-TypeScript: Complete Guide from Basics to Advanced
-Table of Contents
-Introduction
-Setup & Installation
-Basic Types
-Type Annotations & Type Inference
-Interfaces
-Type Aliases
-Union & Intersection Types
-Literal Types
-Enums
-Arrays & Tuples
-Functions
-Objects
-Classes
-Access Modifiers
-Abstract Classes
-Generics
-Type Assertions
-Type Guards & Narrowing
-Utility Types
-Mapped Types
-Conditional Types
-Template Literal Types
-Keyof & Typeof Operators
-Indexed Access Types
-Modules & Namespaces
-Declaration Files
-Decorators
-Mixins
-Type Compatibility & Structural Typing
-Symbols
-Iterators & Generators
-Async/Await & Promises
-Triple-Slash Directives
-tsconfig.json Configuration
-Strict Mode Options
-Discriminated Unions
-Overloading
-Infer Keyword
-Recursive Types
-Variance Annotations
-Satisfies Operator
-Using Keyword (Disposable Resources)
-Performance Tips
-References & Resources
-Introduction
+# TypeScript: Complete Guide from Basics to Advanced
+
+> A comprehensive, production-grade guide and reference manual for TypeScript, covering core fundamentals through cutting-edge advanced type systems and runtime features.
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Setup & Installation](#setup-installation)
+3. [Basic Types](#basic-types)
+4. [Type Annotations & Type Inference](#type-annotations-type-inference)
+5. [Interfaces](#interfaces)
+6. [Type Aliases](#type-aliases)
+7. [Union & Intersection Types](#union-intersection-types)
+8. [Literal Types](#literal-types)
+9. [Enums](#enums)
+10. [Arrays & Tuples](#arrays-tuples)
+11. [Functions](#functions)
+12. [Objects](#objects)
+13. [Classes](#classes)
+14. [Access Modifiers](#access-modifiers)
+15. [Abstract Classes](#abstract-classes)
+16. [Generics](#generics)
+17. [Type Assertions](#type-assertions)
+18. [Type Guards & Narrowing](#type-guards-narrowing)
+19. [Utility Types](#utility-types)
+20. [Mapped Types](#mapped-types)
+21. [Conditional Types](#conditional-types)
+22. [Template Literal Types](#template-literal-types)
+23. [Keyof & Typeof Operators](#keyof-typeof-operators)
+24. [Indexed Access Types](#indexed-access-types)
+25. [Modules & Namespaces](#modules-namespaces)
+26. [Declaration Files](#declaration-files)
+27. [Decorators](#decorators)
+28. [Mixins](#mixins)
+29. [Type Compatibility & Structural Typing](#type-compatibility-structural-typing)
+30. [Symbols](#symbols)
+31. [Iterators & Generators](#iterators-generators)
+32. [Async/Await & Promises](#asyncawait-promises)
+33. [Triple-Slash Directives](#triple-slash-directives)
+34. [tsconfig.json Configuration](#tsconfigjson-configuration)
+35. [Strict Mode Options](#strict-mode-options)
+36. [Discriminated Unions](#discriminated-unions)
+37. [Overloading](#overloading)
+38. [Infer Keyword](#infer-keyword)
+39. [Recursive Types](#recursive-types)
+40. [Variance Annotations](#variance-annotations)
+41. [Satisfies Operator](#satisfies-operator)
+42. [Using Keyword (Disposable Resources)](#using-keyword-disposable-resources)
+43. [Performance Tips](#performance-tips)
+44. [References & Resources](#references-resources)
+
+---
+
+## Introduction
+
 TypeScript is a statically typed superset of JavaScript developed and maintained by Microsoft. It compiles down to plain JavaScript and can run anywhere JavaScript runs — in a browser, on Node.js, or in any JavaScript engine.
 
-Why TypeScript?
-Static Type Checking — Catches bugs at compile time rather than runtime.
-Enhanced IDE Support — Autocompletion, navigation, refactoring.
-Better Readability & Maintainability — Types serve as documentation.
-Modern JavaScript Features — Supports ESNext features and compiles to older targets.
-Large Ecosystem — DefinitelyTyped provides type definitions for thousands of libraries.
-Reference: TypeScript Official Website
+### Why TypeScript?
 
-Setup & Installation
-Prerequisites
-Node.js (v14 or later recommended)
-npm or yarn
-Install TypeScript Globally
-Bash
+- **Static Type Checking** — Catches bugs at compile time rather than runtime.
+- **Enhanced IDE Support** — Autocompletion, navigation, refactoring.
+- **Better Readability & Maintainability** — Types serve as documentation.
+- **Modern JavaScript Features** — Supports ESNext features and compiles to older targets.
+- **Large Ecosystem** — DefinitelyTyped provides type definitions for thousands of libraries.
+> 📖 **Reference:** TypeScript Official Website
 
+---
+
+## Setup & Installation
+
+### Prerequisites
+
+- Node.js (v14 or later recommended)
+- npm or yarn
+### Install TypeScript Globally
+
+```bash
 npm install -g typescript
-Verify Installation
-Bash
+```
 
+### Verify Installation
+
+```bash
 tsc --version
-Initialize a TypeScript Project
-Bash
+```
 
+### Initialize a TypeScript Project
+
+```bash
 mkdir my-ts-project
 cd my-ts-project
 npm init -y
 npm install typescript --save-dev
 npx tsc --init
-This creates a tsconfig.json file with default settings.
+```
 
-Compile a TypeScript File
-Bash
+> **Note:** This creates a tsconfig.json file with default settings.
 
+### Compile a TypeScript File
+
+```bash
 # Create a file
 echo 'const greeting: string = "Hello, TypeScript!"; console.log(greeting);' > index.ts
 
@@ -88,19 +107,26 @@ tsc index.ts
 
 # Run
 node index.js
-Using ts-node (Run TypeScript directly)
-Bash
+```
 
+### Using ts-node (Run TypeScript directly)
+
+```bash
 npm install -g ts-node
 ts-node index.ts
-Reference: TypeScript Installation Guide
+```
 
-Basic Types
+> 📖 **Reference:** TypeScript Installation Guide
+
+---
+
+## Basic Types
+
 TypeScript provides several built-in types that correspond to JavaScript primitives and more.
 
-Primitive Types
-TypeScript
+### Primitive Types
 
+```typescript
 // string
 let firstName: string = "John";
 let templateStr: string = `Hello, ${firstName}`;
@@ -128,9 +154,11 @@ let anotherBig: bigint = BigInt(100);
 let uniqueKey: symbol = Symbol("key");
 let anotherKey: symbol = Symbol("key");
 console.log(uniqueKey === anotherKey); // false
-Special Types
-TypeScript
+```
 
+### Special Types
+
+```typescript
 // any — opt out of type checking
 let flexible: any = "hello";
 flexible = 42;
@@ -163,29 +191,38 @@ function infiniteLoop(): never {
 let obj: object = { name: "John" };
 let arr: object = [1, 2, 3];
 // let primitive: object = 42; // Error!
-Difference between any, unknown, and never
-Type	Description	Type-safe?
-any	Disables type checking	❌
-unknown	Must narrow before use	✅
-never	Represents unreachable code / no value	✅
-Reference: TypeScript Basic Types
+```
 
-Type Annotations & Type Inference
-Type Annotations
+### Difference between any, unknown, and never
+
+| Type    | Description                            | Type-safe? |
+| ------- | -------------------------------------- | ---------- |
+| any     | Disables type checking                 | ❌          |
+| unknown | Must narrow before use                 | ✅          |
+| never   | Represents unreachable code / no value | ✅          |
+
+> 📖 **Reference:** TypeScript Basic Types
+
+---
+
+## Type Annotations & Type Inference
+
+### Type Annotations
+
 Explicitly telling TypeScript what type a variable should hold.
 
-TypeScript
-
+```typescript
 let username: string = "Alice";
 let score: number = 100;
 let isOnline: boolean = true;
 let hobbies: string[] = ["reading", "gaming"];
 let coordinates: [number, number] = [10, 20];
 Type Inference
+```
+
 TypeScript automatically infers the type based on the assigned value.
 
-TypeScript
-
+```typescript
 let city = "New York"; // inferred as string
 let count = 42;        // inferred as number
 let flag = false;      // inferred as boolean
@@ -200,9 +237,11 @@ const names = ["Alice", "Bob", "Charlie"];
 names.forEach((name) => {
   console.log(name.toUpperCase()); // 'name' inferred as string
 });
-When to Use Annotations vs. Inference
-TypeScript
+```
 
+### When to Use Annotations vs. Inference
+
+```typescript
 // ✅ Let TypeScript infer when it's obvious
 let message = "Hello"; // No need for : string
 
@@ -222,14 +261,19 @@ let items: string[] = [];
 // ✅ Use annotations for delayed initialization
 let laterValue: number;
 laterValue = 100;
-Reference: TypeScript Type Inference
+```
 
-Interfaces
+> 📖 **Reference:** TypeScript Type Inference
+
+---
+
+## Interfaces
+
 Interfaces define the shape of an object. They are one of TypeScript's core features for defining contracts.
 
-Basic Interface
-TypeScript
+### Basic Interface
 
+```typescript
 interface User {
   name: string;
   age: number;
@@ -241,9 +285,11 @@ const user: User = {
   age: 25,
   email: "alice@example.com",
 };
-Optional Properties
-TypeScript
+```
 
+### Optional Properties
+
+```typescript
 interface Product {
   id: number;
   name: string;
@@ -257,9 +303,11 @@ const product: Product = {
   price: 999,
   // description is optional
 };
-Readonly Properties
-TypeScript
+```
 
+### Readonly Properties
+
+```typescript
 interface Config {
   readonly apiUrl: string;
   readonly port: number;
@@ -271,9 +319,11 @@ const config: Config = {
 };
 
 // config.apiUrl = "https://other.com"; // Error! Cannot assign to readonly
-Extending Interfaces
-TypeScript
+```
 
+### Extending Interfaces
+
+```typescript
 interface Animal {
   name: string;
   age: number;
@@ -292,9 +342,11 @@ const myDog: Dog = {
     console.log("Woof!");
   },
 };
-Multiple Inheritance
-TypeScript
+```
 
+### Multiple Inheritance
+
+```typescript
 interface Shape {
   color: string;
 }
@@ -316,9 +368,11 @@ const rect: Rectangle = {
     return this.width * this.height;
   },
 };
-Interface for Functions
-TypeScript
+```
 
+### Interface for Functions
+
+```typescript
 interface MathOperation {
   (a: number, b: number): number;
 }
@@ -328,9 +382,11 @@ const subtract: MathOperation = (a, b) => a - b;
 
 console.log(add(5, 3));      // 8
 console.log(subtract(10, 4)); // 6
-Interface for Indexable Types
-TypeScript
+```
 
+### Interface for Indexable Types
+
+```typescript
 interface StringDictionary {
   [key: string]: string;
 }
@@ -345,9 +401,11 @@ interface NumberArray {
 }
 
 const fruits: NumberArray = ["Apple", "Banana", "Cherry"];
-Declaration Merging
-TypeScript
+```
 
+### Declaration Merging
+
+```typescript
 interface Box {
   height: number;
   width: number;
@@ -363,14 +421,19 @@ const box: Box = {
   width: 6,
   depth: 10,
 };
-Reference: TypeScript Interfaces
+```
 
-Type Aliases
+> 📖 **Reference:** TypeScript Interfaces
+
+---
+
+## Type Aliases
+
 Type aliases create a new name for a type. They can represent primitives, unions, tuples, objects, and more.
 
-Basic Type Alias
-TypeScript
+### Basic Type Alias
 
+```typescript
 type StringOrNumber = string | number;
 type ID = string | number;
 type Callback = (data: string) => void;
@@ -381,9 +444,11 @@ userId = "user-101";
 const handler: Callback = (data) => {
   console.log(data);
 };
-Object Type Alias
-TypeScript
+```
 
+### Object Type Alias
+
+```typescript
 type Point = {
   x: number;
   y: number;
@@ -394,17 +459,21 @@ type Point3D = Point & {
 };
 
 const point: Point3D = { x: 1, y: 2, z: 3 };
-Interface vs Type Alias
-Feature	Interface	Type Alias
-Object shapes	✅	✅
-Declaration merging	✅	❌
-Extends/Implements	✅	✅ (via &)
-Union types	❌	✅
-Primitive aliases	❌	✅
-Tuple types	❌	✅
-Computed properties	❌	✅
-TypeScript
+```
 
+### Interface vs Type Alias
+
+| Feature             | Interface | Type Alias |
+| ------------------- | --------- | ---------- |
+| Object shapes       | ✅         | ✅          |
+| Declaration merging | ✅         | ❌          |
+| Extends/Implements  | ✅         | ✅ (via &)  |
+| Union types         | ❌         | ✅          |
+| Primitive aliases   | ❌         | ✅          |
+| Tuple types         | ❌         | ✅          |
+| Computed properties | ❌         | ✅          |
+
+```typescript
 // Type alias can do things interfaces can't
 type Status = "active" | "inactive" | "pending";
 type Pair = [string, number];
@@ -414,14 +483,19 @@ type Nullable<T> = T | null;
 interface Window {
   customProperty: string;
 }
-Reference: TypeScript Type Aliases
+```
 
-Union & Intersection Types
-Union Types (|)
+> 📖 **Reference:** TypeScript Type Aliases
+
+---
+
+## Union & Intersection Types
+
+### Union Types (|)
+
 A value can be one of several types.
 
-TypeScript
-
+```typescript
 type StringOrNumber = string | number;
 
 function formatValue(value: StringOrNumber): string {
@@ -452,10 +526,11 @@ function processInput(input: string | string[]): string {
   return input;
 }
 Intersection Types (&)
+```
+
 Combine multiple types into one.
 
-TypeScript
-
+```typescript
 interface HasName {
   name: string;
 }
@@ -495,9 +570,11 @@ const widget: UIWidget = {
     console.log("Resizing...");
   },
 };
-Union vs Intersection
-TypeScript
+```
 
+### Union vs Intersection
+
+```typescript
 // Union: A OR B
 type A = { a: string };
 type B = { b: number };
@@ -511,14 +588,19 @@ const z: AOrB = { a: "hello", b: 42 };   // OK
 type AAndB = A & B;
 const w: AAndB = { a: "hello", b: 42 };  // Must have both
 // const v: AAndB = { a: "hello" };       // Error! Missing 'b'
-Reference: TypeScript Unions and Intersections
+```
 
-Literal Types
+> 📖 **Reference:** TypeScript Unions and Intersections
+
+---
+
+## Literal Types
+
 Literal types allow you to specify exact values a variable can hold.
 
-String Literal Types
-TypeScript
+### String Literal Types
 
+```typescript
 type Theme = "light" | "dark" | "system";
 
 function setTheme(theme: Theme): void {
@@ -527,9 +609,11 @@ function setTheme(theme: Theme): void {
 
 setTheme("dark");   // OK
 // setTheme("blue"); // Error!
-Numeric Literal Types
-TypeScript
+```
 
+### Numeric Literal Types
+
+```typescript
 type DiceRoll = 1 | 2 | 3 | 4 | 5 | 6;
 
 function rollDice(): DiceRoll {
@@ -537,16 +621,20 @@ function rollDice(): DiceRoll {
 }
 
 type HttpStatusCode = 200 | 201 | 301 | 400 | 401 | 403 | 404 | 500;
-Boolean Literal Types
-TypeScript
+```
 
+### Boolean Literal Types
+
+```typescript
 type True = true;
 type False = false;
 
 type IsAdmin = true;
-Const Assertions
-TypeScript
+```
 
+### Const Assertions
+
+```typescript
 // Without const assertion
 let color = "red"; // type: string
 
@@ -567,14 +655,19 @@ const statuses = ["active", "inactive", "pending"] as const;
 // type is: readonly ["active", "inactive", "pending"]
 
 type Status = (typeof statuses)[number]; // "active" | "inactive" | "pending"
-Reference: TypeScript Literal Types
+```
 
-Enums
+> 📖 **Reference:** TypeScript Literal Types
+
+---
+
+## Enums
+
 Enums allow you to define a set of named constants.
 
-Numeric Enums
-TypeScript
+### Numeric Enums
 
+```typescript
 enum Direction {
   Up,     // 0
   Down,   // 1
@@ -594,9 +687,11 @@ enum StatusCode {
   NotFound = 404,
   InternalServerError = 500,
 }
-String Enums
-TypeScript
+```
 
+### String Enums
+
+```typescript
 enum Color {
   Red = "RED",
   Green = "GREEN",
@@ -606,17 +701,21 @@ enum Color {
 console.log(Color.Red); // "RED"
 
 // String enums don't have reverse mapping
-Heterogeneous Enums (Mixed)
-TypeScript
+```
 
+### Heterogeneous Enums (Mixed)
+
+```typescript
 enum Mixed {
   No = 0,
   Yes = "YES",
 }
 // Not recommended — prefer consistent types
-Const Enums
-TypeScript
+```
 
+### Const Enums
+
+```typescript
 const enum Sizes {
   Small = "S",
   Medium = "M",
@@ -628,9 +727,11 @@ let shirtSize = Sizes.Medium; // Inlined at compile time
 
 // The entire enum is erased during compilation
 // The output is simply: let shirtSize = "M";
-Enum as a Type
-TypeScript
+```
 
+### Enum as a Type
+
+```typescript
 enum LogLevel {
   Error,
   Warn,
@@ -649,9 +750,11 @@ function log(message: string, level: LogLevel): void {
 }
 
 log("Something went wrong!", LogLevel.Error);
-Computed & Constant Members
-TypeScript
+```
 
+### Computed & Constant Members
+
+```typescript
 enum FileAccess {
   None,                                // constant member
   Read = 1 << 1,                       // constant member (2)
@@ -659,12 +762,17 @@ enum FileAccess {
   ReadWrite = Read | Write,            // constant member (6)
   G = "123".length,                    // computed member
 }
-Reference: TypeScript Enums
+```
 
-Arrays & Tuples
-Arrays
-TypeScript
+> 📖 **Reference:** TypeScript Enums
 
+---
+
+## Arrays & Tuples
+
+### Arrays
+
+```typescript
 // Two syntaxes
 let numbers: number[] = [1, 2, 3, 4, 5];
 let names: Array<string> = ["Alice", "Bob", "Charlie"];
@@ -697,10 +805,11 @@ const doubled = numbers.map((n) => n * 2);          // number[]
 const filtered = numbers.filter((n) => n > 2);       // number[]
 const found = numbers.find((n) => n === 3);          // number | undefined
 Tuples
+```
+
 Fixed-length arrays with specific types at each position.
 
-TypeScript
-
+```typescript
 // Basic tuple
 let point: [number, number] = [10, 20];
 let user: [string, number, boolean] = ["Alice", 30, true];
@@ -731,12 +840,17 @@ const point3d: NamedPoint = [1, 2, 3];
 type ReadonlyPair = readonly [string, number];
 const pair: ReadonlyPair = ["hello", 42];
 // pair[0] = "world"; // Error!
-Reference: TypeScript Arrays and Tuples
+```
 
-Functions
-Function Declarations
-TypeScript
+> 📖 **Reference:** TypeScript Arrays and Tuples
 
+---
+
+## Functions
+
+### Function Declarations
+
+```typescript
 // With type annotations
 function add(a: number, b: number): number {
   return a + b;
@@ -749,9 +863,11 @@ const multiply = (a: number, b: number): number => a * b;
 const divide: (a: number, b: number) => number = function (a, b) {
   return a / b;
 };
-Optional & Default Parameters
-TypeScript
+```
 
+### Optional & Default Parameters
+
+```typescript
 // Optional parameter
 function greet(name: string, greeting?: string): string {
   return `${greeting || "Hello"}, ${name}!`;
@@ -767,9 +883,11 @@ function createUser(name: string, role: string = "user"): object {
 
 createUser("Alice");           // { name: "Alice", role: "user" }
 createUser("Alice", "admin");  // { name: "Alice", role: "admin" }
-Rest Parameters
-TypeScript
+```
 
+### Rest Parameters
+
+```typescript
 function sum(...numbers: number[]): number {
   return numbers.reduce((total, n) => total + n, 0);
 }
@@ -779,9 +897,11 @@ console.log(sum(1, 2, 3, 4, 5)); // 15
 function buildName(first: string, ...rest: string[]): string {
   return `${first} ${rest.join(" ")}`;
 }
-Function Types
-TypeScript
+```
 
+### Function Types
+
+```typescript
 // Type alias for function
 type Predicate = (value: number) => boolean;
 
@@ -794,9 +914,11 @@ interface Formatter {
 }
 
 const toUpperCase: Formatter = (value) => value.toUpperCase();
-Void & Never Return Types
-TypeScript
+```
 
+### Void & Never Return Types
+
+```typescript
 // void - function doesn't return a value
 function logMessage(message: string): void {
   console.log(message);
@@ -810,9 +932,11 @@ function fail(message: string): never {
 function assertNever(value: never): never {
   throw new Error(`Unexpected value: ${value}`);
 }
-this Parameter
-TypeScript
+```
 
+### this Parameter
+
+```typescript
 interface Card {
   suit: string;
   rank: number;
@@ -835,9 +959,11 @@ const deck: Deck = {
     };
   },
 };
-Callback Functions
-TypeScript
+```
 
+### Callback Functions
+
+```typescript
 function fetchData(callback: (data: string, error?: Error) => void): void {
   try {
     const data = "Some fetched data";
@@ -854,12 +980,17 @@ fetchData((data, error) => {
     console.log(data);
   }
 });
-Reference: TypeScript Functions
+```
 
-Objects
-Object Types
-TypeScript
+> 📖 **Reference:** TypeScript Functions
 
+---
+
+## Objects
+
+### Object Types
+
+```typescript
 // Inline object type
 function printCoord(pt: { x: number; y: number }): void {
   console.log(`x: ${pt.x}, y: ${pt.y}`);
@@ -878,9 +1009,11 @@ function printName(obj: { first: string; last?: string }): void {
 
 printName({ first: "Alice" });
 printName({ first: "Alice", last: "Smith" });
-Index Signatures
-TypeScript
+```
 
+### Index Signatures
+
+```typescript
 interface StringMap {
   [key: string]: string;
 }
@@ -902,9 +1035,11 @@ const store: DataStore = {
   name: "Test",
   value: 42,
 };
-Excess Property Checks
-TypeScript
+```
 
+### Excess Property Checks
+
+```typescript
 interface SquareConfig {
   color?: string;
   width?: number;
@@ -930,9 +1065,11 @@ interface FlexibleSquareConfig {
   width?: number;
   [propName: string]: any;
 }
-Object Destructuring with Types
-TypeScript
+```
 
+### Object Destructuring with Types
+
+```typescript
 interface ApiResponse {
   data: string[];
   status: number;
@@ -956,12 +1093,17 @@ function configure({
 } = {}): void {
   console.log(`${host}:${port} (debug: ${debug})`);
 }
-Reference: TypeScript Object Types
+```
 
-Classes
-Basic Class
-TypeScript
+> 📖 **Reference:** TypeScript Object Types
 
+---
+
+## Classes
+
+### Basic Class
+
+```typescript
 class Person {
   name: string;
   age: number;
@@ -978,9 +1120,11 @@ class Person {
 
 const person = new Person("Alice", 30);
 console.log(person.greet());
-Parameter Properties (Shorthand)
-TypeScript
+```
 
+### Parameter Properties (Shorthand)
+
+```typescript
 class Employee {
   constructor(
     public name: string,
@@ -997,9 +1141,11 @@ class Employee {
 const emp = new Employee("Bob", 50000, "Engineering", 1);
 console.log(emp.name); // OK
 // console.log(emp.salary); // Error! Private
-Inheritance
-TypeScript
+```
 
+### Inheritance
+
+```typescript
 class Animal {
   constructor(public name: string) {}
 
@@ -1037,9 +1183,11 @@ const dog = new Dog("Rex", "Labrador");
 dog.makeSound(); // "Woof! Woof!"
 dog.move(10);    // "Rex moved 10 meters."
 dog.fetch("ball"); // "Rex fetched the ball"
-Implementing Interfaces
-TypeScript
+```
 
+### Implementing Interfaces
+
+```typescript
 interface Printable {
   print(): void;
 }
@@ -1059,9 +1207,11 @@ class Report implements Printable, Loggable {
     console.log(`[${this.title}] ${message}`);
   }
 }
-Getters and Setters
-TypeScript
+```
 
+### Getters and Setters
+
+```typescript
 class Circle {
   private _radius: number;
 
@@ -1094,9 +1244,11 @@ console.log(circle.area);          // 78.539...
 console.log(circle.circumference); // 31.415...
 circle.radius = 10;
 // circle.radius = -1;             // Error!
-Static Members
-TypeScript
+```
 
+### Static Members
+
+```typescript
 class MathUtils {
   static PI: number = 3.14159265359;
 
@@ -1118,9 +1270,11 @@ class MathUtils {
 console.log(MathUtils.PI);           // 3.14159265359
 console.log(MathUtils.add(2, 3));    // 5
 console.log(MathUtils.factorial(5)); // 120
-Generic Classes
-TypeScript
+```
 
+### Generic Classes
+
+```typescript
 class Stack<T> {
   private items: T[] = [];
 
@@ -1154,13 +1308,17 @@ console.log(numberStack.pop()); // 3
 const stringStack = new Stack<string>();
 stringStack.push("hello");
 stringStack.push("world");
-Reference: TypeScript Classes
+```
 
-Access Modifiers
+> 📖 **Reference:** TypeScript Classes
+
+---
+
+## Access Modifiers
+
 TypeScript provides three access modifiers for class members.
 
-TypeScript
-
+```typescript
 class BankAccount {
   public owner: string;         // accessible everywhere
   protected bank: string;       // accessible in class and subclasses
@@ -1231,9 +1389,11 @@ console.log(savings.getBalance());    // OK — public method
 // console.log(savings.balance);      // Error! Private
 // console.log(savings.bank);         // Error! Protected
 // savings.accountNumber = "new";     // Error! Readonly
-ECMAScript Private Fields (#)
-TypeScript
+```
 
+### ECMAScript Private Fields (#)
+
+```typescript
 class SecureVault {
   #secretCode: string;
   #data: Map<string, string>;
@@ -1258,13 +1418,17 @@ class SecureVault {
 const vault = new SecureVault("1234");
 vault.store("password", "mySecret", "1234");
 // vault.#secretCode; // SyntaxError — truly private at runtime
-Reference: TypeScript Class Members
+```
 
-Abstract Classes
+> 📖 **Reference:** TypeScript Class Members
+
+---
+
+## Abstract Classes
+
 Abstract classes serve as base classes that cannot be instantiated directly. They can contain abstract methods (without implementation) and concrete methods (with implementation).
 
-TypeScript
-
+```typescript
 abstract class Shape {
   constructor(
     public color: string,
@@ -1370,9 +1534,11 @@ shapes.forEach((shape) => {
   console.log(`Perimeter: ${shape.perimeter().toFixed(2)}`);
   console.log("---");
 });
-Abstract Properties
-TypeScript
+```
 
+### Abstract Properties
+
+```typescript
 abstract class Vehicle {
   abstract readonly numberOfWheels: number;
   abstract engineType: string;
@@ -1410,14 +1576,19 @@ class Bicycle extends Vehicle {
     console.log("Stop pedaling");
   }
 }
-Reference: TypeScript Abstract Classes
+```
 
-Generics
+> 📖 **Reference:** TypeScript Abstract Classes
+
+---
+
+## Generics
+
 Generics provide a way to create reusable components that work with a variety of types rather than a single one.
 
-Generic Functions
-TypeScript
+### Generic Functions
 
+```typescript
 // Without generics — loses type information
 function identityAny(value: any): any {
   return value;
@@ -1446,9 +1617,11 @@ function firstElement<T>(arr: T[]): T | undefined {
 
 const first = firstElement([1, 2, 3]);       // number | undefined
 const firstStr = firstElement(["a", "b"]);   // string | undefined
-Generic Constraints
-TypeScript
+```
 
+### Generic Constraints
+
+```typescript
 // Constrain T to types that have a 'length' property
 interface HasLength {
   length: number;
@@ -1473,9 +1646,11 @@ const person = { name: "Alice", age: 30 };
 const name = getProperty(person, "name");  // string
 const age = getProperty(person, "age");    // number
 // getProperty(person, "email");           // Error! "email" is not a key of person
-Generic Interfaces
-TypeScript
+```
 
+### Generic Interfaces
+
+```typescript
 interface Repository<T> {
   findById(id: number): T | undefined;
   findAll(): T[];
@@ -1520,9 +1695,11 @@ class UserRepository implements Repository<User> {
     return true;
   }
 }
-Generic Classes
-TypeScript
+```
 
+### Generic Classes
+
+```typescript
 class KeyValuePair<K, V> {
   constructor(public key: K, public value: V) {}
 
@@ -1547,9 +1724,11 @@ class SortedList<T extends { compareTo(other: T): number }> {
     return [...this.items];
   }
 }
-Generic Defaults
-TypeScript
+```
 
+### Generic Defaults
+
+```typescript
 interface ApiResponse<T = any> {
   data: T;
   status: number;
@@ -1572,9 +1751,11 @@ const response2: ApiResponse<User[]> = {
   message: "OK",
   timestamp: new Date(),
 };
-Generic Utility Functions
-TypeScript
+```
 
+### Generic Utility Functions
+
+```typescript
 // Generic merge function
 function merge<T extends object, U extends object>(obj1: T, obj2: U): T & U {
   return { ...obj1, ...obj2 };
@@ -1600,14 +1781,19 @@ const users = [
 ];
 
 const admins = filterBy(users, "role", "admin");
-Reference: TypeScript Generics
+```
 
-Type Assertions
+> 📖 **Reference:** TypeScript Generics
+
+---
+
+## Type Assertions
+
 Type assertions tell the compiler to treat a value as a specific type. They don't perform any runtime conversion.
 
-as Syntax (Preferred)
-TypeScript
+### as Syntax (Preferred)
 
+```typescript
 const someValue: unknown = "this is a string";
 const strLength: number = (someValue as string).length;
 
@@ -1623,15 +1809,19 @@ interface User {
 const userData: unknown = JSON.parse('{"name": "Alice", "email": "alice@example.com"}');
 const user = userData as User;
 console.log(user.name);
-Angle-Bracket Syntax
-TypeScript
+```
 
+### Angle-Bracket Syntax
+
+```typescript
 // Same thing, different syntax (doesn't work in .tsx files)
 const someValue: unknown = "this is a string";
 const strLength: number = (<string>someValue).length;
-Double Assertion
-TypeScript
+```
 
+### Double Assertion
+
+```typescript
 // When direct assertion isn't possible
 // Use with caution!
 const value = "hello" as unknown as number; // Forces assertion through 'unknown'
@@ -1649,8 +1839,9 @@ interface Dog {
 // const dog = cat as Dog; // Error!
 // const dog = cat as unknown as Dog; // Works but dangerous
 Non-Null Assertion Operator (!)
-TypeScript
+```
 
+```typescript
 function processValue(value: string | null | undefined): void {
   // Tell TypeScript we know value is not null/undefined
   const length = value!.length;
@@ -1667,9 +1858,11 @@ function safePprocessValue(value: string | null | undefined): void {
     console.log(value.length);
   }
 }
-satisfies vs Type Assertion
-TypeScript
+```
 
+### satisfies vs Type Assertion
+
+```typescript
 // Type assertion can lose information
 const colors1 = {
   red: [255, 0, 0],
@@ -1684,14 +1877,19 @@ const colors2 = {
 } satisfies Record<string, string | number[]>;
 // colors2.red is number[] — type is preserved!
 // colors2.green is string — type is preserved!
-Reference: TypeScript Type Assertions
+```
 
-Type Guards & Narrowing
+> 📖 **Reference:** TypeScript Type Assertions
+
+---
+
+## Type Guards & Narrowing
+
 Type guards allow TypeScript to narrow the type within a conditional block.
 
-typeof Guards
-TypeScript
+### typeof Guards
 
+```typescript
 function padLeft(value: string, padding: string | number): string {
   if (typeof padding === "number") {
     // TypeScript knows padding is number here
@@ -1703,9 +1901,11 @@ function padLeft(value: string, padding: string | number): string {
 
 console.log(padLeft("Hello", 4));      // "    Hello"
 console.log(padLeft("Hello", ">>> ")); // ">>> Hello"
-instanceof Guards
-TypeScript
+```
 
+### instanceof Guards
+
+```typescript
 class Bird {
   fly(): void {
     console.log("Flying...");
@@ -1725,9 +1925,11 @@ function move(animal: Bird | Fish): void {
     animal.swim(); // TypeScript knows it's Fish
   }
 }
-in Operator
-TypeScript
+```
 
+### in Operator
+
+```typescript
 interface Car {
   drive(): void;
   honk(): void;
@@ -1748,8 +1950,9 @@ function operate(vehicle: Car | Boat): void {
   }
 }
 Custom Type Guards (Type Predicates)
-TypeScript
+```
 
+```typescript
 interface Cat {
   type: "cat";
   meow(): void;
@@ -1792,9 +1995,11 @@ function processValues(values: (string | number | null | undefined)[]): string[]
     .filter(isString)
     .map((s) => s.toUpperCase());
 }
-Assertion Functions
-TypeScript
+```
 
+### Assertion Functions
+
+```typescript
 function assertIsString(value: unknown): asserts value is string {
   if (typeof value !== "string") {
     throw new Error(`Expected string, got ${typeof value}`);
@@ -1821,9 +2026,11 @@ function getUser(id: number): { name: string } | undefined {
 const user = getUser(1);
 assertIsDefined(user);
 console.log(user.name); // No error — TypeScript knows user is defined
-Truthiness Narrowing
-TypeScript
+```
 
+### Truthiness Narrowing
+
+```typescript
 function printLength(str: string | null | undefined): void {
   if (str) {
     // str is string here (truthy)
@@ -1838,9 +2045,11 @@ function printLength(str: string | null | undefined): void {
 // Using Boolean as a type guard
 const values: (string | null | undefined)[] = ["hello", null, "world", undefined];
 const validValues: string[] = values.filter(Boolean) as string[];
-Equality Narrowing
-TypeScript
+```
 
+### Equality Narrowing
+
+```typescript
 function example(x: string | number, y: string | boolean): void {
   if (x === y) {
     // Both must be string (only common type)
@@ -1855,16 +2064,21 @@ function checkValue(value: string | null): void {
     console.log(value.toUpperCase());
   }
 }
-Reference: TypeScript Narrowing
+```
 
-Utility Types
+> 📖 **Reference:** TypeScript Narrowing
+
+---
+
+## Utility Types
+
 TypeScript provides several built-in utility types for common type transformations.
 
 Partial<T>
+
 Makes all properties optional.
 
-TypeScript
-
+```typescript
 interface User {
   name: string;
   email: string;
@@ -1879,10 +2093,11 @@ const user: User = { name: "Alice", email: "alice@example.com", age: 30 };
 const updated = updateUser(user, { name: "Alicia" });
 // Only name is updated, email and age remain the same
 Required<T>
+```
+
 Makes all properties required.
 
-TypeScript
-
+```typescript
 interface Config {
   host?: string;
   port?: number;
@@ -1896,10 +2111,11 @@ const fullConfig: Required<Config> = {
   // All properties are now required
 };
 Readonly<T>
+```
+
 Makes all properties readonly.
 
-TypeScript
-
+```typescript
 interface Todo {
   title: string;
   completed: boolean;
@@ -1912,10 +2128,11 @@ const todo: Readonly<Todo> = {
 
 // todo.completed = true; // Error!
 Record<K, V>
+```
+
 Constructs a type with keys of type K and values of type V.
 
-TypeScript
-
+```typescript
 type Fruit = "apple" | "banana" | "cherry";
 
 interface FruitInfo {
@@ -1936,10 +2153,11 @@ const pages: PageInfo = {
   about: { title: "About", url: "/about" },
 };
 Pick<T, K>
+```
+
 Creates a type with only the specified properties.
 
-TypeScript
-
+```typescript
 interface User {
   id: number;
   name: string;
@@ -1956,10 +2174,11 @@ const publicUser: PublicUser = {
   email: "alice@example.com",
 };
 Omit<T, K>
+```
+
 Creates a type without the specified properties.
 
-TypeScript
-
+```typescript
 type UserWithoutPassword = Omit<User, "password">;
 
 const safeUser: UserWithoutPassword = {
@@ -1972,38 +2191,42 @@ const safeUser: UserWithoutPassword = {
 // Omit multiple properties
 type BasicUser = Omit<User, "password" | "createdAt">;
 Exclude<T, U>
+```
+
 Excludes from a union type all members assignable to U.
 
-TypeScript
-
+```typescript
 type AllColors = "red" | "green" | "blue" | "yellow";
 type WarmColors = Exclude<AllColors, "green" | "blue">; // "red" | "yellow"
 
 type NonNullableString = Exclude<string | null | undefined, null | undefined>; // string
 Extract<T, U>
+```
+
 Extracts from a union type all members assignable to U.
 
-TypeScript
-
+```typescript
 type AllColors = "red" | "green" | "blue" | "yellow";
 type PrimaryColors = Extract<AllColors, "red" | "blue">; // "red" | "blue"
 
 type NumericTypes = Extract<string | number | boolean | bigint, number | bigint>; // number | bigint
 NonNullable<T>
+```
+
 Removes null and undefined from a type.
 
-TypeScript
-
+```typescript
 type MaybeString = string | null | undefined;
 type DefiniteString = NonNullable<MaybeString>; // string
 
 type MaybeUser = User | null;
 type DefiniteUser = NonNullable<MaybeUser>; // User
 ReturnType<T>
+```
+
 Extracts the return type of a function type.
 
-TypeScript
-
+```typescript
 function createUser(name: string, age: number) {
   return { name, age, createdAt: new Date() };
 }
@@ -2014,10 +2237,11 @@ type NewUser = ReturnType<typeof createUser>;
 type StringReturn = ReturnType<() => string>; // string
 type VoidReturn = ReturnType<() => void>;     // void
 Parameters<T>
+```
+
 Extracts parameter types as a tuple.
 
-TypeScript
-
+```typescript
 function greet(name: string, age: number, greeting?: string): string {
   return `${greeting || "Hello"}, ${name}! You are ${age}.`;
 }
@@ -2028,10 +2252,11 @@ type GreetParams = Parameters<typeof greet>;
 const params: GreetParams = ["Alice", 30, "Hi"];
 greet(...params);
 ConstructorParameters<T>
+```
+
 Extracts parameter types from a constructor.
 
-TypeScript
-
+```typescript
 class Person {
   constructor(public name: string, public age: number) {}
 }
@@ -2039,10 +2264,11 @@ class Person {
 type PersonConstructorParams = ConstructorParameters<typeof Person>;
 // [name: string, age: number]
 InstanceType<T>
+```
+
 Extracts the instance type of a constructor.
 
-TypeScript
-
+```typescript
 class Animal {
   name: string;
   constructor(name: string) {
@@ -2052,31 +2278,38 @@ class Animal {
 
 type AnimalInstance = InstanceType<typeof Animal>; // Animal
 Awaited<T>
+```
+
 Unwraps the type of a Promise.
 
-TypeScript
-
+```typescript
 type A = Awaited<Promise<string>>;                    // string
 type B = Awaited<Promise<Promise<number>>>;            // number
 type C = Awaited<boolean | Promise<number>>;           // boolean | number
 Uppercase<S>, Lowercase<S>, Capitalize<S>, Uncapitalize<S>
+```
+
 Intrinsic string manipulation types.
 
-TypeScript
-
+```typescript
 type Greeting = "hello, world";
 type ShoutyGreeting = Uppercase<Greeting>;       // "HELLO, WORLD"
 type QuietGreeting = Lowercase<"HELLO">;          // "hello"
 type CapGreeting = Capitalize<"hello">;           // "Hello"
 type UncapGreeting = Uncapitalize<"Hello">;       // "hello"
-Reference: TypeScript Utility Types
+```
 
-Mapped Types
+> 📖 **Reference:** TypeScript Utility Types
+
+---
+
+## Mapped Types
+
 Mapped types allow you to create new types by transforming properties of existing types.
 
-Basic Mapped Type
-TypeScript
+### Basic Mapped Type
 
+```typescript
 // Making all properties optional (like Partial)
 type MyPartial<T> = {
   [P in keyof T]?: T[P];
@@ -2105,9 +2338,11 @@ interface User {
 
 type MutableUser = Mutable<User>;
 // { id: number; name: string; email?: string }
-Mapped Type with Transformation
-TypeScript
+```
 
+### Mapped Type with Transformation
+
+```typescript
 // Nullable version of all properties
 type Nullable<T> = {
   [P in keyof T]: T[P] | null;
@@ -2139,8 +2374,9 @@ type PersonGetters = Getters<Person>;
 type PersonSetters = Setters<Person>;
 // { setName: (value: string) => void; setAge: (value: number) => void }
 Key Remapping (via as)
-TypeScript
+```
 
+```typescript
 // Remove specific properties
 type RemoveKind<T> = {
   [P in keyof T as Exclude<P, "kind">]: T[P];
@@ -2176,14 +2412,19 @@ type EventMap<T> = {
 
 type PersonEvents = EventMap<Person>;
 // { onNameChange: (value: string) => void; onAgeChange: (value: number) => void }
-Reference: TypeScript Mapped Types
+```
 
-Conditional Types
+> 📖 **Reference:** TypeScript Mapped Types
+
+---
+
+## Conditional Types
+
 Conditional types select one of two possible types based on a condition.
 
-Basic Conditional Type
-TypeScript
+### Basic Conditional Type
 
+```typescript
 // Syntax: T extends U ? X : Y
 type IsString<T> = T extends string ? "yes" : "no";
 
@@ -2198,9 +2439,11 @@ function processId<T extends string | number>(id: T): IdType<T> {
   // Implementation
   return id as IdType<T>;
 }
-Distributive Conditional Types
-TypeScript
+```
 
+### Distributive Conditional Types
+
+```typescript
 // When T is a union, the conditional type distributes over each member
 type ToArray<T> = T extends any ? T[] : never;
 
@@ -2212,9 +2455,11 @@ type ToArrayNonDist<T> = [T] extends [any] ? T[] : never;
 
 type MixedArray = ToArrayNonDist<string | number>;
 // (string | number)[] (not distributed)
-Conditional Type with never
-TypeScript
+```
 
+### Conditional Type with never
+
+```typescript
 // Filter out types
 type NonString<T> = T extends string ? never : T;
 
@@ -2224,9 +2469,11 @@ type Result = NonString<string | number | boolean>;
 // This is essentially how Exclude works
 type MyExclude<T, U> = T extends U ? never : T;
 type MyExtract<T, U> = T extends U ? T : never;
-Nested Conditional Types
-TypeScript
+```
 
+### Nested Conditional Types
+
+```typescript
 type TypeName<T> = T extends string
   ? "string"
   : T extends number
@@ -2244,9 +2491,11 @@ type T2 = TypeName<42>;         // "number"
 type T3 = TypeName<true>;       // "boolean"
 type T4 = TypeName<() => void>; // "function"
 type T5 = TypeName<string[]>;   // "object"
-Conditional Types with Generics
-TypeScript
+```
 
+### Conditional Types with Generics
+
+```typescript
 type Flatten<T> = T extends Array<infer U> ? U : T;
 
 type Str = Flatten<string[]>;   // string
@@ -2256,14 +2505,19 @@ type Num = Flatten<number>;     // number
 type DeepFlatten<T> = T extends Array<infer U> ? DeepFlatten<U> : T;
 
 type Deep = DeepFlatten<number[][][]>; // number
-Reference: TypeScript Conditional Types
+```
 
-Template Literal Types
+> 📖 **Reference:** TypeScript Conditional Types
+
+---
+
+## Template Literal Types
+
 Template literal types build on string literal types to create complex string patterns.
 
-Basic Template Literals
-TypeScript
+### Basic Template Literals
 
+```typescript
 type World = "world";
 type Greeting = `hello ${World}`; // "hello world"
 
@@ -2273,9 +2527,11 @@ type Size = "small" | "medium" | "large";
 
 type ColoredSize = `${Color}-${Size}`;
 // "red-small" | "red-medium" | "red-large" | "green-small" | ... (9 combinations)
-Event Handler Types
-TypeScript
+```
 
+### Event Handler Types
+
+```typescript
 type EventName = "click" | "scroll" | "mousemove";
 type EventHandler = `on${Capitalize<EventName>}`;
 // "onClick" | "onScroll" | "onMousemove"
@@ -2285,9 +2541,11 @@ interface EventHandlers {
   onScroll: (event: Event) => void;
   onMousemove: (event: MouseEvent) => void;
 }
-CSS-like Types
-TypeScript
+```
 
+### CSS-like Types
+
+```typescript
 type CSSUnit = "px" | "em" | "rem" | "%" | "vh" | "vw";
 type CSSValue = `${number}${CSSUnit}`;
 
@@ -2297,9 +2555,11 @@ const height: CSSValue = "50vh";    // OK
 
 type HexDigit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "a" | "b" | "c" | "d" | "e" | "f";
 type HexColor = `#${string}`; // Simplified hex color
-Pattern Matching with Template Literals
-TypeScript
+```
 
+### Pattern Matching with Template Literals
+
+```typescript
 type ExtractRouteParams<T extends string> =
   T extends `${infer _Start}:${infer Param}/${infer Rest}`
     ? { [K in Param | keyof ExtractRouteParams<Rest>]: string }
@@ -2309,9 +2569,11 @@ type ExtractRouteParams<T extends string> =
 
 type Params = ExtractRouteParams<"/users/:userId/posts/:postId">;
 // { userId: string; postId: string }
-String Manipulation with Template Literals
-TypeScript
+```
 
+### String Manipulation with Template Literals
+
+```typescript
 // Convert camelCase to snake_case (simplified)
 type CamelToSnakeCase<S extends string> = S extends `${infer T}${infer U}`
   ? `${T extends Capitalize<T> ? "_" : ""}${Lowercase<T>}${CamelToSnakeCase<U>}`
@@ -2325,14 +2587,19 @@ type Setter<T extends string> = `set${Capitalize<T>}`;
 
 type NameGetter = Getter<"name">;   // "getName"
 type AgeSetter = Setter<"age">;     // "setAge"
-Reference: TypeScript Template Literal Types
+```
 
-Keyof & Typeof Operators
+> 📖 **Reference:** TypeScript Template Literal Types
+
+---
+
+## Keyof & Typeof Operators
+
 keyof Operator
+
 Creates a union type of all property names of a type.
 
-TypeScript
-
+```typescript
 interface User {
   id: number;
   name: string;
@@ -2366,10 +2633,11 @@ type OptionalFlags<T> = {
 type UserFlags = OptionalFlags<User>;
 // { id?: boolean; name?: boolean; email?: boolean; age?: boolean }
 typeof Operator
+```
+
 Gets the type of a JavaScript value.
 
-TypeScript
-
+```typescript
 // Basic typeof
 const message = "Hello, World!";
 type MessageType = typeof message; // string
@@ -2436,9 +2704,11 @@ type DirectionType = typeof Direction;
 // The enum object type
 type DirectionValues = `${Direction}`;
 // "UP" | "DOWN" | "LEFT" | "RIGHT"
-Combining keyof and typeof
-TypeScript
+```
 
+### Combining keyof and typeof
+
+```typescript
 const routes = {
   home: "/",
   about: "/about",
@@ -2456,13 +2726,17 @@ function navigate(route: RouteName): void {
 
 navigate("home");    // OK
 // navigate("login"); // Error!
-Reference: TypeScript Keyof, TypeScript Typeof
+```
 
-Indexed Access Types
+> 📖 **Reference:** TypeScript Keyof, TypeScript Typeof
+
+---
+
+## Indexed Access Types
+
 Access the type of a specific property within a type.
 
-TypeScript
-
+```typescript
 interface User {
   id: number;
   name: string;
@@ -2514,12 +2788,17 @@ function fetchApi<T extends keyof ApiResponses>(url: T): Promise<ApiResponses[T]
 // Return type is automatically inferred
 const users = fetchApi("/users");      // Promise<User[]>
 const user = fetchApi("/users/:id");   // Promise<User>
-Reference: TypeScript Indexed Access Types
+```
 
-Modules & Namespaces
-ES Modules (Recommended)
-TypeScript
+> 📖 **Reference:** TypeScript Indexed Access Types
 
+---
+
+## Modules & Namespaces
+
+### ES Modules (Recommended)
+
+```typescript
 // math.ts — Named exports
 export function add(a: number, b: number): number {
   return a + b;
@@ -2542,8 +2821,9 @@ export default class Calculator {
     return a + b;
   }
 }
-TypeScript
+```
 
+```typescript
 // app.ts — Importing
 import Calculator, { add, subtract, PI, MathResult } from "./math";
 
@@ -2563,9 +2843,11 @@ async function loadModule() {
   const math = await import("./math");
   console.log(math.add(1, 2));
 }
-Re-exports
-TypeScript
+```
 
+### Re-exports
+
+```typescript
 // index.ts — barrel file
 export { add, subtract } from "./math";
 export { default as Calculator } from "./math";
@@ -2575,8 +2857,9 @@ export type { MathResult } from "./math";
 export * from "./math";
 export * as Math from "./math";
 Namespaces (Legacy)
-TypeScript
+```
 
+```typescript
 namespace Validation {
   export interface StringValidator {
     isValid(str: string): boolean;
@@ -2618,16 +2901,21 @@ namespace App {
     }
   }
 }
-Note: ES Modules are preferred over namespaces in modern TypeScript. Namespaces are primarily useful for organizing types in declaration files.
+```
 
-Reference: TypeScript Modules
+> **Note:** ES Modules are preferred over namespaces in modern TypeScript. Namespaces are primarily useful for organizing types in declaration files.
 
-Declaration Files
+> 📖 **Reference:** TypeScript Modules
+
+---
+
+## Declaration Files
+
 Declaration files (.d.ts) provide type information for JavaScript libraries.
 
-Basic Declaration File
-TypeScript
+### Basic Declaration File
 
+```typescript
 // types/my-library.d.ts
 
 // Declare a module
@@ -2648,9 +2936,11 @@ declare module "my-library" {
 
   export default Client;
 }
-Ambient Declarations
-TypeScript
+```
 
+### Ambient Declarations
+
+```typescript
 // globals.d.ts
 
 // Declare global variables
@@ -2678,9 +2968,11 @@ declare namespace NodeJS {
     JWT_SECRET: string;
   }
 }
-Module Augmentation
-TypeScript
+```
 
+### Module Augmentation
+
+```typescript
 // Extending Express Request type
 import "express";
 
@@ -2701,9 +2993,11 @@ declare module "lodash" {
     customMethod(input: string): string;
   }
 }
-Wildcard Module Declarations
-TypeScript
+```
 
+### Wildcard Module Declarations
+
+```typescript
 // Declare modules for file types
 declare module "*.css" {
   const styles: { [className: string]: string };
@@ -2724,9 +3018,11 @@ declare module "*.png" {
   const value: string;
   export default value;
 }
-Writing Declaration Files for JavaScript
-TypeScript
+```
 
+### Writing Declaration Files for JavaScript
+
+```typescript
 // For a JavaScript file: utils.js
 // function capitalize(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
 // function range(start, end) { ... }
@@ -2739,16 +3035,21 @@ export interface UtilOptions {
   locale?: string;
   trim?: boolean;
 }
-Reference: TypeScript Declaration Files, DefinitelyTyped
+```
 
-Decorators
+> 📖 **Reference:** TypeScript Declaration Files, DefinitelyTyped
+
+---
+
+## Decorators
+
 Decorators are special declarations that attach metadata to classes, methods, properties, or parameters. TypeScript 5 supports both legacy (experimental) and the new ECMAScript decorators.
 
-Note: For legacy decorators, enable "experimentalDecorators": true in tsconfig.json.
+> **Note:** For legacy decorators, enable "experimentalDecorators": true in tsconfig.json.
 
-Class Decorators
-TypeScript
+### Class Decorators
 
+```typescript
 // Legacy decorator
 function sealed(constructor: Function) {
   Object.seal(constructor);
@@ -2772,9 +3073,11 @@ class Greeter {
     return `Hello, ${this.greeting}`;
   }
 }
-Decorator Factories
-TypeScript
+```
 
+### Decorator Factories
+
+```typescript
 function color(value: string) {
   return function (constructor: Function) {
     constructor.prototype.color = value;
@@ -2804,9 +3107,11 @@ class Car {
     return `${this.brand}`;
   }
 }
-Method Decorators
-TypeScript
+```
 
+### Method Decorators
+
+```typescript
 function log(
   target: any,
   propertyKey: string,
@@ -2852,9 +3157,11 @@ class MathService {
 
 const math = new MathService();
 math.multiply(3, 4);
-Property Decorators
-TypeScript
+```
 
+### Property Decorators
+
+```typescript
 function required(target: any, propertyKey: string) {
   let value: any;
 
@@ -2881,9 +3188,11 @@ class UserForm {
   @required
   email!: string;
 }
-Parameter Decorators
-TypeScript
+```
 
+### Parameter Decorators
+
+```typescript
 function validate(
   target: any,
   propertyKey: string,
@@ -2901,8 +3210,9 @@ class UserService {
   }
 }
 TC39 Stage 3 Decorators (TypeScript 5.0+)
-TypeScript
+```
 
+```typescript
 // New decorator syntax — no experimentalDecorators flag needed
 function loggedMethod<This, Args extends any[], Return>(
   target: (this: This, ...args: Args) => Return,
@@ -2926,14 +3236,19 @@ class MyClass {
     return `Hello, ${name}!`;
   }
 }
-Reference: TypeScript Decorators, TC39 Decorators Proposal
+```
 
-Mixins
+> 📖 **Reference:** TypeScript Decorators, TC39 Decorators Proposal
+
+---
+
+## Mixins
+
 Mixins allow you to compose classes from reusable components.
 
-Mixin Pattern
-TypeScript
+### Mixin Pattern
 
+```typescript
 // Constructor type
 type Constructor<T = {}> = new (...args: any[]) => T;
 
@@ -3005,9 +3320,11 @@ console.log(user.name);      // "Alice"
 console.log(user.isActive);  // true
 console.log(user.tags);      // ["admin"]
 console.log(user.createdAt); // Date
-Constrained Mixins
-TypeScript
+```
 
+### Constrained Mixins
+
+```typescript
 // Require the base class to have specific properties
 interface HasId {
   id: number;
@@ -3032,14 +3349,19 @@ class Entity {
 const SerializableEntity = Serializable(Entity);
 const entity = new SerializableEntity(1);
 console.log(entity.serialize()); // {"id":1}
-Reference: TypeScript Mixins
+```
 
-Type Compatibility & Structural Typing
+> 📖 **Reference:** TypeScript Mixins
+
+---
+
+## Type Compatibility & Structural Typing
+
 TypeScript uses structural typing (duck typing). Types are compatible if they have the same structure, regardless of their names.
 
-Basic Structural Typing
-TypeScript
+### Basic Structural Typing
 
+```typescript
 interface Point {
   x: number;
   y: number;
@@ -3068,9 +3390,11 @@ interface Point3D {
 const point3d: Point3D = { x: 1, y: 2, z: 3 };
 const point2d: Point = point3d; // OK — Point3D has all properties of Point
 // const bad: Point3D = point2d; // Error — missing 'z'
-Function Compatibility
-TypeScript
+```
 
+### Function Compatibility
+
+```typescript
 // Parameter compatibility
 type Handler = (event: MouseEvent) => void;
 type GeneralHandler = (event: Event) => void;
@@ -3099,8 +3423,9 @@ let ar: AnyReturner = () => 42;
 ar = sr; // OK — string is assignable to any
 // sr = ar; // Error in strict mode
 Freshness (Strict Object Literal Checking)
-TypeScript
+```
 
+```typescript
 interface Options {
   width: number;
   height: number;
@@ -3112,12 +3437,17 @@ interface Options {
 // Via variable — no strict checking
 const config = { width: 100, height: 200, depth: 50 };
 const opts: Options = config; // OK — extra properties allowed
-Reference: TypeScript Type Compatibility
+```
 
-Symbols
-Basic Symbols
-TypeScript
+> 📖 **Reference:** TypeScript Type Compatibility
 
+---
+
+## Symbols
+
+### Basic Symbols
+
+```typescript
 // Create unique symbols
 const sym1 = Symbol("description");
 const sym2 = Symbol("description");
@@ -3143,9 +3473,11 @@ for (const key in person) {
 // But accessible via Object.getOwnPropertySymbols
 const symbols = Object.getOwnPropertySymbols(person);
 console.log(symbols); // [Symbol(name), Symbol(age)]
-Unique Symbols
-TypeScript
+```
 
+### Unique Symbols
+
+```typescript
 // unique symbol is a subtype of symbol
 const uniqueSym: unique symbol = Symbol("unique");
 
@@ -3156,9 +3488,11 @@ interface WithSymbol {
 const obj: WithSymbol = {
   [uniqueSym]: "hello",
 };
-Well-Known Symbols
-TypeScript
+```
 
+### Well-Known Symbols
+
+```typescript
 class Collection {
   private items: number[] = [];
 
@@ -3198,12 +3532,17 @@ collection.add(3);
 for (const item of collection) {
   console.log(item); // 1, 2, 3
 }
-Reference: MDN Symbols
+```
 
-Iterators & Generators
-Iterators
-TypeScript
+> 📖 **Reference:** MDN Symbols
 
+---
+
+## Iterators & Generators
+
+### Iterators
+
+```typescript
 // Implementing the Iterable interface
 class Range implements Iterable<number> {
   constructor(private start: number, private end: number) {}
@@ -3234,9 +3573,11 @@ const numbers = [...new Range(1, 10)]; // [1, 2, 3, ..., 10]
 // Destructuring
 const [first, second, third] = new Range(10, 20);
 console.log(first, second, third); // 10, 11, 12
-Generators
-TypeScript
+```
 
+### Generators
+
+```typescript
 // Basic generator
 function* numberGenerator(): Generator<number, void, unknown> {
   yield 1;
@@ -3300,9 +3641,11 @@ function* outerGenerator(): Generator<string | number> {
 }
 
 console.log([...outerGenerator()]); // [1, "a", "b", 2]
-Async Generators
-TypeScript
+```
 
+### Async Generators
+
+```typescript
 async function* fetchPages(url: string): AsyncGenerator<any[], void, unknown> {
   let page = 1;
   let hasMore = true;
@@ -3326,12 +3669,17 @@ async function processAllPages() {
     console.log(`Processing ${page.length} items`);
   }
 }
-Reference: TypeScript Iterators and Generators
+```
 
-Async/Await & Promises
-Promises
-TypeScript
+> 📖 **Reference:** TypeScript Iterators and Generators
 
+---
+
+## Async/Await & Promises
+
+### Promises
+
+```typescript
 // Creating a promise
 function fetchUser(id: number): Promise<{ name: string; email: string }> {
   return new Promise((resolve, reject) => {
@@ -3389,9 +3737,11 @@ const firstSuccess = await Promise.any([
   fetchUser(2),  // Resolves
   fetchUser(3),  // Resolves
 ]);
-Async/Await
-TypeScript
+```
 
+### Async/Await
+
+```typescript
 // Async function
 async function getUser(id: number): Promise<{ name: string }> {
   const response = await fetch(`https://api.example.com/users/${id}`);
@@ -3477,13 +3827,17 @@ async function withRetry<T>(
   }
   throw new Error("Should not reach here");
 }
-Reference: MDN async/await, TypeScript Handbook
+```
 
-Triple-Slash Directives
+> 📖 **Reference:** MDN async/await, TypeScript Handbook
+
+---
+
+## Triple-Slash Directives
+
 Triple-slash directives are single-line comments containing XML tags used as compiler directives.
 
-TypeScript
-
+```typescript
 /// <reference path="./global.d.ts" />
 /// <reference types="node" />
 /// <reference lib="es2020" />
@@ -3499,14 +3853,19 @@ TypeScript
 // reference lib — include a built-in lib
 /// <reference lib="es2020.promise" />
 /// <reference lib="dom" />
-Note: In most modern projects, tsconfig.json is used instead of triple-slash directives.
+```
 
-Reference: TypeScript Triple-Slash Directives
+> **Note:** In most modern projects, tsconfig.json is used instead of triple-slash directives.
 
-tsconfig.json Configuration
-Complete Example
-JSON
+> 📖 **Reference:** TypeScript Triple-Slash Directives
 
+---
+
+## tsconfig.json Configuration
+
+### Complete Example
+
+```jsonc
 {
   "compilerOptions": {
     // --- Language and Environment ---
@@ -3582,10 +3941,13 @@ JSON
     { "path": "./tsconfig.node.json" }     // Project references
   ]
 }
-Common Configurations by Project Type
-Node.js Project
-JSON
+```
 
+### Common Configurations by Project Type
+
+### Node.js Project
+
+```jsonc
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -3601,9 +3963,11 @@ JSON
     "declaration": true
   }
 }
-React Project
-JSON
+```
 
+### React Project
+
+```jsonc
 {
   "compilerOptions": {
     "target": "ES2020",
@@ -3618,13 +3982,17 @@ JSON
     "skipLibCheck": true
   }
 }
-Reference: TypeScript tsconfig.json, TSConfig Reference
+```
 
-Strict Mode Options
+> 📖 **Reference:** TypeScript tsconfig.json, TSConfig Reference
+
+---
+
+## Strict Mode Options
+
 Understanding each strict mode option individually.
 
-TypeScript
-
+```typescript
 // --- strictNullChecks ---
 // Without: string can be null
 // With: must explicitly handle null
@@ -3696,13 +4064,17 @@ class Derived extends Base {
     console.log("Hello from Derived");
   }
 }
-Reference: TypeScript Strict Mode
+```
 
-Discriminated Unions
+> 📖 **Reference:** TypeScript Strict Mode
+
+---
+
+## Discriminated Unions
+
 Also known as "tagged unions" or "algebraic data types." They use a common property (discriminant) to narrow types.
 
-TypeScript
-
+```typescript
 // The discriminant property is 'type'
 interface Circle {
   type: "circle";
@@ -3758,9 +4130,11 @@ const shapes: Shape[] = [
 shapes.forEach((shape) => {
   console.log(`${describeShape(shape)} — Area: ${calculateArea(shape).toFixed(2)}`);
 });
-Real-World Example: State Management
-TypeScript
+```
 
+### Real-World Example: State Management
+
+```typescript
 // Action types for a reducer
 interface LoadingAction {
   type: "LOADING";
@@ -3794,9 +4168,11 @@ function reducer<T>(state: State<T>, action: Action<T>): State<T> {
       return { ...state, loading: false, error: action.error };
   }
 }
-Result Type Pattern
-TypeScript
+```
 
+### Result Type Pattern
+
+```typescript
 type Result<T, E = Error> =
   | { success: true; data: T }
   | { success: false; error: E };
@@ -3814,12 +4190,17 @@ if (result.success) {
 } else {
   console.log(`Error: ${result.error}`); // TypeScript knows error exists
 }
-Reference: TypeScript Discriminated Unions
+```
 
-Overloading
-Function Overloading
-TypeScript
+> 📖 **Reference:** TypeScript Discriminated Unions
 
+---
+
+## Overloading
+
+### Function Overloading
+
+```typescript
 // Overload signatures
 function createElement(tag: "a"): HTMLAnchorElement;
 function createElement(tag: "canvas"): HTMLCanvasElement;
@@ -3854,9 +4235,11 @@ function processInput(input: string | number | boolean): string | number | boole
 const str = processInput("  Hello  ");  // string
 const num = processInput(3.14159);       // number
 const bool = processInput(true);         // boolean
-Method Overloading in Classes
-TypeScript
+```
 
+### Method Overloading in Classes
+
+```typescript
 class DataStore {
   private data: Map<string, any> = new Map();
 
@@ -3883,9 +4266,11 @@ store.set("age", 30);
 
 const name = store.get("name", "Unknown"); // string
 const age = store.get("age", 0);           // number
-Constructor Overloading
-TypeScript
+```
 
+### Constructor Overloading
+
+```typescript
 class Point {
   x: number;
   y: number;
@@ -3905,14 +4290,19 @@ class Point {
 
 const p1 = new Point(1, 2);
 const p2 = new Point({ x: 3, y: 4 });
-Reference: TypeScript Function Overloads
+```
 
-Infer Keyword
+> 📖 **Reference:** TypeScript Function Overloads
+
+---
+
+## Infer Keyword
+
 The infer keyword is used within conditional types to infer (extract) a type from another type.
 
-Basic Inference
-TypeScript
+### Basic Inference
 
+```typescript
 // Infer return type of a function
 type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
 
@@ -3924,9 +4314,11 @@ type C = MyReturnType<() => Promise<number>>;     // Promise<number>
 type MyParameters<T> = T extends (...args: infer P) => any ? P : never;
 
 type D = MyParameters<(a: string, b: number) => void>; // [a: string, b: number]
-Inferring from Generic Types
-TypeScript
+```
 
+### Inferring from Generic Types
+
+```typescript
 // Unwrap Promise
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
@@ -3946,9 +4338,11 @@ type Flatten<T> = T extends Array<infer U> ? Flatten<U> : T;
 
 type I = Flatten<number[][][]>;  // number
 type J = Flatten<string[]>;      // string
-Advanced Infer Patterns
-TypeScript
+```
 
+### Advanced Infer Patterns
+
+```typescript
 // Extract first and last elements of a tuple
 type First<T extends any[]> = T extends [infer F, ...any[]] ? F : never;
 type Last<T extends any[]> = T extends [...any[], infer L] ? L : never;
@@ -3986,14 +4380,19 @@ type FirstString<T> = T extends [infer S extends string, ...unknown[]]
 
 type P = FirstString<["hello", 42]>;  // "hello"
 type Q = FirstString<[42, "hello"]>;  // never
-Reference: TypeScript Conditional Types - Inferring
+```
 
-Recursive Types
+> 📖 **Reference:** TypeScript Conditional Types - Inferring
+
+---
+
+## Recursive Types
+
 Types that reference themselves.
 
-Recursive Type Aliases
-TypeScript
+### Recursive Type Aliases
 
+```typescript
 // JSON value type
 type JSONValue =
   | string
@@ -4054,9 +4453,11 @@ const list: LinkedList<number> = {
     },
   },
 };
-Deep Partial
-TypeScript
+```
 
+### Deep Partial
+
+```typescript
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
@@ -4084,9 +4485,11 @@ const partialConfig: DeepPartial<Config> = {
     },
   },
 };
-Deep Readonly
-TypeScript
+```
 
+### Deep Readonly
+
+```typescript
 type DeepReadonly<T> = {
   readonly [P in keyof T]: T[P] extends object
     ? T[P] extends Function
@@ -4112,9 +4515,11 @@ const immutableConfig: DeepReadonly<Config> = {
 
 // immutableConfig.database.host = "other"; // Error!
 // immutableConfig.database.credentials.username = "root"; // Error!
-Recursive Path Types
-TypeScript
+```
 
+### Recursive Path Types
+
+```typescript
 // Get all possible dot-notation paths of an object
 type Paths<T, D extends number = 10> = [D] extends [never]
   ? never
@@ -4149,13 +4554,17 @@ interface Data {
 
 type DataPaths = Paths<Data>;
 // "user" | "user.name" | "user.address" | "user.address.city" | "user.address.zip" | "posts" | ...
-Reference: TypeScript Recursive Types
+```
 
-Variance Annotations
+> 📖 **Reference:** TypeScript Recursive Types
+
+---
+
+## Variance Annotations
+
 TypeScript 4.7 introduced explicit variance annotations for type parameters.
 
-TypeScript
-
+```typescript
 // Covariant (out) — type parameter only in output positions
 interface Producer<out T> {
   produce(): T;
@@ -4187,13 +4596,17 @@ let animalProducer: Producer<Animal> = dogProducer; // OK
 // Contravariant — Consumer<Animal> is a subtype of Consumer<Dog>
 let animalConsumer: Consumer<Animal> = { consume: (a) => console.log(a.name) };
 let dogConsumer: Consumer<Dog> = animalConsumer; // OK
-Reference: TypeScript 4.7 Variance Annotations
+```
 
-Satisfies Operator
+> 📖 **Reference:** TypeScript 4.7 Variance Annotations
+
+---
+
+## Satisfies Operator
+
 Introduced in TypeScript 4.9, satisfies validates that an expression matches a type without changing the inferred type.
 
-TypeScript
-
+```typescript
 // Problem: type annotation loses specific information
 type Color = "red" | "green" | "blue";
 type ColorMap = Record<Color, string | [number, number, number]>;
@@ -4249,13 +4662,17 @@ if (routes.home.exact) {
 
 // TypeScript knows the keys
 type RouteNames = keyof typeof routes; // "home" | "about" | "users"
-Reference: TypeScript 4.9 satisfies
+```
 
-Using Keyword (Disposable Resources)
+> 📖 **Reference:** TypeScript 4.9 satisfies
+
+---
+
+## Using Keyword (Disposable Resources)
+
 TypeScript 5.2 introduced the using keyword for explicit resource management (TC39 proposal).
 
-TypeScript
-
+```typescript
 // Disposable interface
 interface Disposable {
   [Symbol.dispose](): void;
@@ -4326,12 +4743,17 @@ async function main() {
   // Use resource...
   // Automatically disposed at end of scope
 }
-Reference: TypeScript 5.2 using Declarations, TC39 Explicit Resource Management
+```
 
-Performance Tips
-Type-Level Performance
-TypeScript
+> 📖 **Reference:** TypeScript 5.2 using Declarations, TC39 Explicit Resource Management
 
+---
+
+## Performance Tips
+
+### Type-Level Performance
+
+```typescript
 // 1. Prefer interfaces over type intersections for object types
 // ✅ Good — interfaces are cached
 interface User {
@@ -4369,9 +4791,11 @@ type DeepCheck<T> = T extends string
 
 // 5. Enable incremental compilation
 // { "compilerOptions": { "incremental": true, "tsBuildInfoFile": ".tsbuildinfo" } }
-Runtime Performance
-TypeScript
+```
 
+### Runtime Performance
+
+```typescript
 // 1. const enums are inlined — zero runtime cost
 const enum Direction {
   Up = "UP",
@@ -4390,45 +4814,64 @@ const CONFIG = {
 function parse(input: string): unknown {
   return JSON.parse(input);
 }
-References & Resources
-Official Resources
-Resource	URL
-TypeScript Official Docs	typescriptlang.org/docs
-TypeScript Handbook	typescriptlang.org/docs/handbook
-TypeScript Playground	typescriptlang.org/play
-TypeScript GitHub Repository	github.com/microsoft/TypeScript
-TypeScript Release Notes	typescriptlang.org/docs/handbook/release-notes
-TSConfig Reference	typescriptlang.org/tsconfig
-DefinitelyTyped	github.com/DefinitelyTyped
-Learning Resources
-Resource	URL
-TypeScript Deep Dive (Basarat)	basarat.gitbook.io/typescript
-Type Challenges	github.com/type-challenges
-Total TypeScript (Matt Pocock)	totaltypescript.com
-TypeScript Error Translator	ts-error-translator.vercel.app
-Execute Program	executeprogram.com/courses/typescript
-TypeHero	typehero.dev
-Community & Ecosystem
-Resource	URL
-TypeScript Reddit	reddit.com/r/typescript
-TypeScript Discord	discord.gg/typescript
-Stack Overflow TypeScript Tag	stackoverflow.com/questions/tagged/typescript
-TypeScript Weekly Newsletter	typescript-weekly.com
-Tools & Libraries
-Tool	Description	URL
-ts-node	Run TypeScript directly	github.com/TypeStrong/ts-node
-tsx	Fast TypeScript executor	github.com/privatenumber/tsx
-tsc-watch	Watch mode with restart	github.com/gilamran/tsc-watch
-ts-prune	Find unused exports	github.com/nadeesha/ts-prune
-typescript-eslint	ESLint plugin for TypeScript	typescript-eslint.io
-zod	TypeScript-first schema validation	zod.dev
-io-ts	Runtime type checking	github.com/gcanti/io-ts
-ts-pattern	Pattern matching for TypeScript	github.com/gvergnaud/ts-pattern
-Effect	TypeScript framework for effects	effect.website
-Books
-Book	Author
-Programming TypeScript	Boris Cherny
-Effective TypeScript: 62 Specific Ways to Improve Your TypeScript	Dan Vanderkam
-Learning TypeScript	Josh Goldberg
-TypeScript in 50 Lessons	Stefan Baumgartner
-Type-Level TypeScript	Gabriel Vergnaud
+```
+
+---
+
+## References & Resources
+
+### Official Resources
+
+| Resource                     | URL                                                                                                      |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------- |
+| TypeScript Official Docs     | [typescriptlang.org/docs](https://typescriptlang.org/docs)                                               |
+| TypeScript Handbook          | [typescriptlang.org/docs/handbook](https://typescriptlang.org/docs/handbook)                             |
+| TypeScript Playground        | [typescriptlang.org/play](https://typescriptlang.org/play)                                               |
+| TypeScript GitHub Repository | [github.com/microsoft/TypeScript](https://github.com/microsoft/TypeScript)                               |
+| TypeScript Release Notes     | [typescriptlang.org/docs/handbook/release-notes](https://typescriptlang.org/docs/handbook/release-notes) |
+| TSConfig Reference           | [typescriptlang.org/tsconfig](https://typescriptlang.org/tsconfig)                                       |
+| DefinitelyTyped              | [github.com/DefinitelyTyped](https://github.com/DefinitelyTyped)                                         |
+
+### Learning Resources
+
+| Resource                       | URL                                                                                    |
+| ------------------------------ | -------------------------------------------------------------------------------------- |
+| TypeScript Deep Dive (Basarat) | [basarat.gitbook.io/typescript](https://basarat.gitbook.io/typescript)                 |
+| Type Challenges                | [github.com/type-challenges](https://github.com/type-challenges)                       |
+| Total TypeScript (Matt Pocock) | [totaltypescript.com](https://totaltypescript.com)                                     |
+| TypeScript Error Translator    | [ts-error-translator.vercel.app](https://ts-error-translator.vercel.app)               |
+| Execute Program                | [executeprogram.com/courses/typescript](https://executeprogram.com/courses/typescript) |
+| TypeHero                       | [typehero.dev](https://typehero.dev)                                                   |
+
+### Community & Ecosystem
+
+| Resource                      | URL                                                                                                    |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------ |
+| TypeScript Reddit             | [reddit.com/r/typescript](https://reddit.com/r/typescript)                                             |
+| TypeScript Discord            | [discord.gg/typescript](https://discord.gg/typescript)                                                 |
+| Stack Overflow TypeScript Tag | [stackoverflow.com/questions/tagged/typescript](https://stackoverflow.com/questions/tagged/typescript) |
+| TypeScript Weekly Newsletter  | [typescript-weekly.com](https://typescript-weekly.com)                                                 |
+
+### Tools & Libraries
+
+| Tool              | Description                        | URL                                                                        |
+| ----------------- | ---------------------------------- | -------------------------------------------------------------------------- |
+| ts-node           | Run TypeScript directly            | [github.com/TypeStrong/ts-node](https://github.com/TypeStrong/ts-node)     |
+| tsx               | Fast TypeScript executor           | [github.com/privatenumber/tsx](https://github.com/privatenumber/tsx)       |
+| tsc-watch         | Watch mode with restart            | [github.com/gilamran/tsc-watch](https://github.com/gilamran/tsc-watch)     |
+| ts-prune          | Find unused exports                | [github.com/nadeesha/ts-prune](https://github.com/nadeesha/ts-prune)       |
+| typescript-eslint | ESLint plugin for TypeScript       | [typescript-eslint.io](https://typescript-eslint.io)                       |
+| zod               | TypeScript-first schema validation | [zod.dev](https://zod.dev)                                                 |
+| io-ts             | Runtime type checking              | [github.com/gcanti/io-ts](https://github.com/gcanti/io-ts)                 |
+| ts-pattern        | Pattern matching for TypeScript    | [github.com/gvergnaud/ts-pattern](https://github.com/gvergnaud/ts-pattern) |
+| Effect            | TypeScript framework for effects   | [effect.website](https://effect.website)                                   |
+
+### Books
+
+| Book                                                              | Author             |
+| ----------------------------------------------------------------- | ------------------ |
+| Programming TypeScript                                            | Boris Cherny       |
+| Effective TypeScript: 62 Specific Ways to Improve Your TypeScript | Dan Vanderkam      |
+| Learning TypeScript                                               | Josh Goldberg      |
+| TypeScript in 50 Lessons                                          | Stefan Baumgartner |
+| Type-Level TypeScript                                             | Gabriel Vergnaud   |
