@@ -1,0 +1,43 @@
+{
+  // ── Shared compiler settings for every project in this folder ──────────────
+  // Each project's own tsconfig.json extends this file and only adds the bits
+  // that are specific to it (rootDir / outDir). See readme.md §34 (tsconfig)
+  // and §35 (strict mode) for what each flag actually does.
+  "compilerOptions": {
+    // ── Language / emit ────────────────────────────────────────────────────
+    "target": "ES2022",
+    // ESNext.Disposable is what makes `using` / `await using` type-check (§42).
+    "lib": ["ES2023", "ESNext.Disposable"],
+    // NodeNext = the modern Node ESM resolution rules. It forces relative
+    // imports to carry an explicit file extension ("./shapes.js"), which is
+    // exactly what Node itself requires for ESM.
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    // ── Strictness (§35) ───────────────────────────────────────────────────
+    // "strict": true turns on the whole family below at once; the extra flags
+    // listed after it are NOT part of the strict family and are opt-in.
+    "strict": true,
+    "noUncheckedIndexedAccess": true,      // arr[i] is T | undefined
+    "exactOptionalPropertyTypes": true,    // `x?: T` cannot be assigned `undefined`
+    "noImplicitOverride": true,            // must write `override` in subclasses
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // ── Module interop ─────────────────────────────────────────────────────
+    "esModuleInterop": true,
+    "isolatedModules": true,               // each file must be transpilable alone
+    "verbatimModuleSyntax": true,          // forces `import type` for type-only imports
+
+    // ── Output ─────────────────────────────────────────────────────────────
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,                     // required for `tsc -b` project references
+    "incremental": true,
+    "skipLibCheck": true
+  }
+}
