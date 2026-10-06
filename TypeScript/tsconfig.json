@@ -1,0 +1,14 @@
+{
+  // Solution-style tsconfig: it compiles nothing itself, it just lists the
+  // projects. `tsc -b` then builds them in dependency order and skips the
+  // ones that are already up to date (readme.md §43, performance tips).
+  "files": [],
+  "references": [
+    { "path": "./01-type-foundations" },
+    { "path": "./02-oop-patterns" },
+    { "path": "./03-generics-and-advanced-types" },
+    { "path": "./04-async-and-runtime" },
+    { "path": "./05-modules-and-cli" },
+    { "path": "./06-http-api-server" }
+  ]
+}

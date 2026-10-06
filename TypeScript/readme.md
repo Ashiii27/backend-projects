@@ -1,6 +1,8 @@
 # TypeScript: Complete Guide from Basics to Advanced
 
 > A comprehensive, production-grade guide and reference manual for TypeScript, covering core fundamentals through cutting-edge advanced type systems and runtime features.
+>
+> **Want the code?** [`projects.md`](./projects.md) indexes six runnable projects in this folder that cover every section below — `npm install && npm test`.
 
 ## Table of Contents
 

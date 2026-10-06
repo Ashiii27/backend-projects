@@ -1,0 +1,25 @@
+{
+  "name": "typescript-learning-projects",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Small, runnable TypeScript projects that together cover the whole TypeScript guide in readme.md.",
+  "type": "module",
+  "engines": { "node": ">=20.11" },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "typecheck": "tsc -b --force",
+    "test": "node --import tsx --test \"*/src/**/*.test.ts\"",
+    "start:01": "tsx 01-type-foundations/src/index.ts",
+    "start:02": "tsx 02-oop-patterns/src/index.ts",
+    "start:03": "tsx 03-generics-and-advanced-types/src/index.ts",
+    "start:04": "tsx 04-async-and-runtime/src/index.ts",
+    "start:05": "tsx 05-modules-and-cli/src/index.ts",
+    "start:06": "tsx 06-http-api-server/src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
