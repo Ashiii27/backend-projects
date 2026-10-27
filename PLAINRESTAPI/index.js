@@ -10,15 +10,15 @@ const PORT = 3000; // we defined a variable to store the value of the port
 const server = http.createServer(async (req, res) => {
     console.log("Request received");
     if (req.method == "GET") {
-        res.end("Get request");
+        res.end("Get request received");
     } else if (req.method == "POST") {
-        res.end("POST request");
+        res.end("POST request received");
     } else if (req.method == "PUT") {
-        res.end("PUT request");
+        res.end("PUT request received");
     } else if (req.method == "DELETE") {
-        res.end("DELETE request");
+        res.end("DELETE request received");
     } else {
-        res.end("Method not allowed");
+        res.end("Method not allowed");  
     }
 });//creating a new server instance, but it is not running
 
